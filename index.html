@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><title>GreenLane</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#1DB36B;--dg:#14532D;--mint:#E8F7EF;--bg:#DDE9E2;--card:#F6FAF7;--sur:#fff;--tx:#10281B;--mu:#6B7F73;--or:#F59E0B;--rd:#EF4444;--ln:#E1ECE5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0B1510;--card:#12201A;--sur:#1A2D24;--tx:#E6F2EA;--mu:#8CA597;--mint:#1E3A2C;--ln:#27402F;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px 'Plus Jakarta Sans',system-ui,sans-serif;min-height:100vh;padding:16px}
+.app{display:grid;grid-template-columns:210px 1fr 280px;gap:0;background:var(--card);border-radius:28px;box-shadow:0 10px 40px #0002;overflow:hidden;max-width:1400px;margin:auto;min-height:calc(100vh - 32px)}
+nav{padding:22px 14px;display:flex;flex-direction:column;gap:6px;background:var(--sur)}
+.logo{font-weight:800;font-size:19px;color:var(--g);margin:0 8px 18px}
+nav button{all:unset;cursor:pointer;padding:11px 14px;border-radius:12px;color:var(--mu);font-weight:600;display:flex;gap:10px}
+nav button:hover{background:var(--mint)}nav button.on{background:var(--g);color:#fff}nav button:focus-visible,.chip:focus-visible,button:focus-visible{outline:2px solid var(--dg);outline-offset:2px}
+nav .out{margin-top:auto}
+main{padding:24px;overflow:auto}
+header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+header h1{font-size:20px;margin:0 auto 0 0}
+.in,select{border:1px solid var(--ln);background:var(--sur);color:var(--tx);border-radius:12px;padding:10px 14px;font:inherit}
+.btn{background:var(--g);color:#fff;border:0;border-radius:12px;padding:10px 18px;font:600 14px inherit;cursor:pointer}
+.bell{position:relative;background:var(--sur);border-radius:50%;width:40px;height:40px;display:grid;place-items:center}
+.bell b{position:absolute;top:-2px;right:-2px;background:var(--or);color:#fff;border-radius:9px;font-size:10px;padding:1px 5px}
+.grid{display:grid;gap:14px}.k4{grid-template-columns:repeat(4,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c2{grid-template-columns:1fr 1fr}
+.card{background:var(--sur);border-radius:20px;padding:16px;box-shadow:0 2px 10px #0000000d}
+.lbl{color:var(--mu);font-weight:600;font-size:12px}.big{font-size:24px;font-weight:800;margin:4px 0}
+.up{color:var(--g)}.dn{color:var(--rd)}
+h2{font-size:16px;margin:22px 0 10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{all:unset;cursor:pointer;padding:7px 14px;border-radius:20px;background:var(--sur);border:1px solid var(--ln);font-weight:600}.chip.on{background:var(--g);color:#fff;border-color:var(--g)}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;background:var(--mint);color:var(--g)}.tag.o{background:#F59E0B22;color:var(--or)}.tag.r{background:#EF444422;color:var(--rd)}
+.pc{background:linear-gradient(160deg,var(--mint),var(--sur));border-radius:22px;padding:16px;position:relative}
+.pc .sc{font-size:30px;font-weight:800;color:var(--g)}.heart{position:absolute;top:12px;right:14px;cursor:pointer;font-size:18px;background:none;border:0;color:var(--mu)}.heart.on{color:var(--rd)}
+table{width:100%;border-collapse:collapse}th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--ln);white-space:nowrap}th{color:var(--mu);font-size:12px;cursor:pointer}tr.r:hover{background:var(--mint);cursor:pointer}
+.tw{overflow-x:auto}
+.bar{display:flex;height:16px;border-radius:8px;overflow:hidden;background:var(--ln);min-width:60px}.bar i{display:block}
+.row{display:grid;grid-template-columns:130px 1fr 60px;gap:10px;align-items:center;margin:8px 0}
+aside{background:linear-gradient(180deg,#8FD3C0,#5FBF8A 55%,#2F8F55);padding:22px;color:#fff}
+aside .card{color:var(--tx);margin-top:12px}
+.av{width:84px;height:84px;border-radius:50%;background:var(--dg);display:grid;place-items:center;font-size:36px;margin:12px auto;border:4px solid #fff8}
+input[type=range]{width:100%;accent-color:var(--g)}
+.hm{display:grid;grid-template-columns:90px repeat(4,1fr);gap:4px;text-align:center}.hm div{padding:12px 4px;border-radius:8px;font-weight:700;font-size:12px}
+.rk{display:grid;grid-template-columns:34px 1fr 90px;gap:10px;align-items:center;padding:10px 12px;margin:6px 0;transition:transform .45s}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:min(380px,100%);background:var(--sur);box-shadow:-10px 0 40px #0004;padding:24px;transform:translateX(105%);transition:.3s;z-index:9;overflow:auto}.drawer.open{transform:none}
+.sk{background:linear-gradient(90deg,var(--ln),var(--mint),var(--ln));height:70px;border-radius:16px;animation:s 1s infinite;background-size:200%}@keyframes s{to{background-position:-200%}}
+.view{display:none}.view.on{display:block;animation:f .25s}@keyframes f{from{opacity:0;transform:translateY(6px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:1100px){.app{grid-template-columns:70px 1fr}aside{display:none}nav button span{display:none}.logo{font-size:0}.logo:before{content:'GL';font-size:16px}.k4{grid-template-columns:1fr 1fr}.c3{grid-template-columns:1fr}.c2{grid-template-columns:1fr}}
+@media(max-width:640px){body{padding:0}.app{border-radius:0;grid-template-columns:1fr;padding-bottom:64px}nav{position:fixed;bottom:0;left:0;right:0;flex-direction:row;z-index:5;padding:8px;justify-content:space-around;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}nav .logo,nav .out{display:none}nav button span{display:none}main{padding:14px}.row{grid-template-columns:90px 1fr 50px}}
+</style></head><body>
+<div class="app">
+<nav aria-label="Menu"><div class="logo">🌿 GreenLane</div>
+<button class="on" data-v="dash"><b>▦</b><span>Dashboard</span></button>
+<button data-v="score"><b>☰</b><span>Partner Scorecard</span></button>
+<button data-v="rank"><b>★</b><span>Ranking</span></button>
+<button data-v="sim"><b>⇄</b><span>Simulasi What-If</span></button>
+<button data-v="risk"><b>⚠</b><span>Prediksi Risiko</span></button>
+<button class="out"><b>⎋</b><span>Logout</span></button></nav>
+<main>
+<header><h1>Halo, Raka! 👋</h1><input class="in" id="q" placeholder="Cari mitra" aria-label="Cari mitra"><button class="btn" id="qb">Cari</button><div class="bell">🔔<b>3</b></div></header>
+
+<section class="view on" id="dash"><div id="sk"><div class="grid k4"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div></div></div>
+<div id="dc" hidden>
+<div class="grid k4" id="kpi"></div>
+<h2>Koridor</h2><div class="chips" id="cor"></div>
+<h2>Peringkat Mitra Teratas</h2><div class="grid c3" id="top"></div>
+<h2>Cost-to-Serve per Mitra</h2><div class="card"><div class="chips" id="leg" style="margin-bottom:8px"></div><div id="stk"></div></div>
+<h2>Peringatan</h2><div class="chips" id="al"></div>
+<h2>Rekomendasi Tindakan</h2><div class="grid c3" id="rec"></div></div></section>
+
+<section class="view" id="score"><div class="chips" style="margin-bottom:12px" id="f1"></div>
+<div class="chips" style="margin-bottom:12px" id="f2"></div><div class="card tw"><table id="tb"></table></div></section>
+
+<section class="view" id="rank"><div class="grid c2" style="grid-template-columns:1fr 1.4fr">
+<div class="card"><div class="chips" id="pre" style="margin-bottom:12px"></div><div id="sl"></div></div>
+<div><div class="card" id="rl"></div><div class="card" style="margin-top:14px" id="br"></div>
+<h2>Jejak Keputusan</h2><div class="card tw"><table id="lg"><tr><th>Pengguna</th><th>Bobot</th><th>Waktu</th></tr></table></div>
+<button class="btn" style="margin-top:12px">Ekspor PDF</button></div></div></section>
+
+<section class="view" id="sim"><div class="grid c2"><div class="card" id="si"></div><div><div class="grid c2" id="so"></div><div class="card" style="margin-top:14px" id="sb"></div></div></div></section>
+
+<section class="view" id="risk"><div class="card"><div class="hm" id="hm"></div></div><h2>Mitra Berisiko</h2><div class="grid c3" id="rc"></div></section>
+</main>
+<aside><div style="font-weight:800;font-size:18px">Profil Saya</div><div class="av">🧑‍💼</div>
+<div style="text-align:center;font-weight:800">Raka Pratama</div><div style="text-align:center;opacity:.85">Manajer Logistik • KAI Logistik</div>
+<div style="font-weight:800;margin-top:22px">Tinjauan Mendatang</div>
+<div class="card"><b>Review Kuartal Q1</b><div class="lbl">14 Jan 2027</div><div>👤👤👤</div></div>
+<div class="card"><b>Evaluasi Mitra Nusa Trans</b><div class="lbl">21 Jan 2027</div><div>👤👤</div></div></aside>
+</div>
+<div class="drawer" id="dr" role="dialog" aria-label="Detail mitra"></div>
+
+<script>
+const COR=['Jakarta','Semarang','Bandung','Surabaya','Sumatra'],FL=['Diesel','B40','HVO','EV'];
+// nama,koridor,armada,tarif,telat,rusak,emisiBiaya,risiko (ribu Rp), emisi kgCO2e, ontime, damage%, sla
+const D=[['Nusa Trans','Jakarta','Diesel',820,90,40,60,70,48,86,2.1,90],['Bumi Karya Logistik','Jakarta','B40',860,60,30,45,50,39,91,1.4,94],['Sinar Jawa Cargo','Semarang','Diesel',780,110,55,62,85,50,82,2.8,87],['Elektra Mobilitas','Jakarta','EV',990,35,25,8,30,9,95,0.9,97],['Cakra Angkut','Bandung','B40',840,70,35,42,55,37,89,1.7,92],['Prima Lintas','Surabaya','Diesel',770,120,60,64,90,51,80,3.1,85],['Hijau Nusantara','Surabaya','HVO',910,50,30,18,40,16,93,1.1,95],['Dwi Karsa Trucking','Semarang','B40',850,75,38,44,60,38,88,1.9,91],['Sumatra Kencana','Sumatra','Diesel',800,130,65,66,100,53,78,3.4,83],['Borneo Link','Sumatra','HVO',930,55,32,20,45,17,92,1.2,94],['Gema Tirta','Bandung','Diesel',760,100,50,58,80,47,84,2.5,88],['Volta Cargo','Surabaya','EV',1010,40,28,9,35,10,94,1.0,96]]
+.map((r,i)=>({id:i,n:r[0],c:r[1],f:r[2],b:{Tarif:r[3],Keterlambatan:r[4],Kerusakan:r[5],Emisi:r[6],Risiko:r[7]},co2:r[8],ot:r[9],dm:r[10],sla:r[11],cost:r[3]+r[4]+r[5]+r[6]+r[7]}));
+const LC={Tarif:'#14532D',Keterlambatan:'#F59E0B',Kerusakan:'#EF4444',Emisi:'#1DB36B',Risiko:'#8B5CF6'};
+const $=s=>document.querySelector(s),rp=n=>'Rp '+Math.round(n*1000).toLocaleString('id-ID'),nf=(n,d=1)=>n.toLocaleString('id-ID',{maximumFractionDigits:d,minimumFractionDigits:d});
+const W={Biaya:30,Emisi:25,'Ketepatan Waktu':20,Kerusakan:10,SLA:15};
+const PRE={'Sensitif Waktu':[15,10,45,10,20],'Rendah Emisi':[15,50,10,10,15],'Hemat Biaya':[55,10,15,10,10],'Seimbang':[30,25,20,10,15]};
+let corF='Semua',fl=new Set(),sortK='cost',sortD=1,sel=0,watch=new Set([1,3]),legOn=new Set(Object.keys(LC));
+function topsis(){const ks=[['cost',0],['co2',0],['ot',1],['dm',0],['sla',1]],w=Object.values(W),T=w.reduce((a,b)=>a+b,0)||1;
+ const nm=ks.map(([k])=>Math.sqrt(D.reduce((a,d)=>a+d[k]**2,0)));
+ const V=D.map(d=>ks.map(([k],j)=>d[k]/nm[j]*w[j]/T));
+ const best=ks.map(([,b],j)=>{const c=V.map(v=>v[j]);return b?Math.max(...c):Math.min(...c)}),worst=ks.map(([,b],j)=>{const c=V.map(v=>v[j]);return b?Math.min(...c):Math.max(...c)});
+ return D.map((d,i)=>{const dp=Math.hypot(...V[i].map((v,j)=>v-best[j])),dn=Math.hypot(...V[i].map((v,j)=>v-worst[j]));d.sc=dn/(dp+dn)*100;d.part=V[i].map(v=>v/(V[i].reduce((a,b)=>a+b,0)||1)*100);return d}).slice().sort((a,b)=>b.sc-a.sc)}
+function spark(d){const p=[...Array(8)].map((_,i)=>d.sc*(0.9+0.015*i+((d.id*7+i*3)%5)/100));const m=Math.min(...p),M=Math.max(...p);return `<svg width="100%" height="28" viewBox="0 0 80 28"><polyline fill="none" stroke="#1DB36B" stroke-width="2" points="${p.map((v,i)=>i*11+','+(26-(v-m)/(M-m||1)*24)).join(' ')}"/></svg>`}
+const emc=d=>d.co2<20?['A','']:d.co2<40?['B','o']:['C','r'];
+function dash(){const L=D.filter(d=>corF=='Semua'||d.c==corF),R=topsis().filter(d=>L.includes(d)),a=k=>L.reduce((s,d)=>s+d[k],0)/(L.length||1);
+ const K=[['Total Cost-to-Serve',rp(a('cost')),'▼ 3,2%','up'],['Emisi per Leg',nf(a('co2'))+' kg CO₂e','▼ 5,8%','up'],['On-Time Rate',nf(a('ot'))+'%','▲ 1,4%','up'],['Mitra Aktif',L.length,'▲ 2','up']];
+ $('#kpi').innerHTML=K.map(k=>`<div class="card"><div class="lbl">${k[0]}</div><div class="big">${k[1]}</div><div class="${k[3]}">${k[2]}</div></div>`).join('');
+ $('#cor').innerHTML=['Semua',...COR].map(c=>`<button class="chip ${c==corF?'on':''}">${c}</button>`).join('');
+ $('#cor').querySelectorAll('button').forEach(b=>b.onclick=()=>{corF=b.textContent;dash()});
+ $('#top').innerHTML=R.slice(0,3).map(d=>{const e=emc(d);return `<div class="pc"><button class="heart ${watch.has(d.id)?'on':''}" data-id="${d.id}" aria-label="Pantau">♥</button><b>${d.n}</b><div class="lbl">${d.c} • ${d.f}</div><div class="sc">${nf(d.sc)}</div>${spark(d)}<span class="tag ${e[1]}">Emisi ${e[0]}</span></div>`}).join('')||'<div class="lbl">—</div>';
+ $('#top').querySelectorAll('.heart').forEach(h=>h.onclick=()=>{const i=+h.dataset.id;watch.has(i)?watch.delete(i):watch.add(i);h.classList.toggle('on')});
+ $('#leg').innerHTML=Object.keys(LC).map(k=>`<button class="chip ${legOn.has(k)?'on':''}" style="${legOn.has(k)?'background:'+LC[k]+';border-color:'+LC[k]:''}">${k}</button>`).join('');
+ $('#leg').querySelectorAll('button').forEach(b=>b.onclick=()=>{legOn.has(b.textContent)?legOn.delete(b.textContent):legOn.add(b.textContent);dash()});
+ const mx=Math.max(...D.map(d=>d.cost));$('#stk').innerHTML=L.map(d=>`<div class="row"><span>${d.n}</span><div class="bar" style="width:${Object.entries(d.b).reduce((s,[k,v])=>s+(legOn.has(k)?v:0),0)/mx*100}%">${Object.entries(d.b).filter(([k])=>legOn.has(k)).map(([k,v])=>`<i title="${k}" style="width:${v/d.cost*100}%;background:${LC[k]}"></i>`).join('')}</div><span>${Math.round(d.cost)}k</span></div>`).join('');
+ const risk=D.filter(d=>d.ot<85);$('#al').innerHTML=risk.map(d=>`<span class="tag r">${d.n} • Terlambat ${Math.round(100-d.ot)*2}% • ${d.c}</span>`).join('');
+ $('#rec').innerHTML=[['Alihkan 20% volume','Hemat Rp 12 jt'],['Naik ke HVO','−38% CO₂e'],['Evaluasi ulang 3 mitra','Q1 2027']].map(r=>`<div class="card"><b>${r[0]}</b><div class="big up">${r[1]}</div></div>`).join('')}
+function score(){const cols=[['n','Mitra'],['c','Koridor'],['f','Armada'],['cost','Biaya/shipment'],['co2','Emisi (kg)'],['ot','On-time %'],['dm','Damage %'],['sla','SLA %'],['sc','Skor']];topsis();
+ $('#f1').innerHTML=['Semua',...COR].map(c=>`<button class="chip ${c==corF?'on':''}">${c}</button>`).join('');
+ $('#f2').innerHTML=FL.map(c=>`<button class="chip ${fl.has(c)?'on':''}">${c}</button>`).join('');
+ $('#f1').querySelectorAll('button').forEach(b=>b.onclick=()=>{corF=b.textContent;score()});
+ $('#f2').querySelectorAll('button').forEach(b=>b.onclick=()=>{fl.has(b.textContent)?fl.delete(b.textContent):fl.add(b.textContent);score()});
+ const q=$('#q').value.toLowerCase(),L=D.filter(d=>(corF=='Semua'||d.c==corF)&&(!fl.size||fl.has(d.f))&&d.n.toLowerCase().includes(q)).sort((a,b)=>(typeof a[sortK]=='string'?a[sortK].localeCompare(b[sortK]):a[sortK]-b[sortK])*sortD);
+ $('#tb').innerHTML='<tr>'+cols.map(c=>`<th data-k="${c[0]}">${c[1]}${c[0]==sortK?(sortD>0?' ▲':' ▼'):''}</th>`).join('')+'</tr>'+L.map(d=>`<tr class="r" data-id="${d.id}"><td><b>${d.n}</b></td><td>${d.c}</td><td><span class="tag">${d.f}</span></td><td>${rp(d.cost)}</td><td>${d.co2}</td><td>${d.ot}</td><td>${d.dm}</td><td>${d.sla}</td><td><b>${nf(d.sc)}</b></td></tr>`).join('');
+ $('#tb').querySelectorAll('th').forEach(h=>h.onclick=()=>{const k=h.dataset.k;sortD=sortK==k?-sortD:1;sortK=k;score()});
+ $('#tb').querySelectorAll('tr.r').forEach(r=>r.onclick=()=>drawer(+r.dataset.id))}
+function radar(d){const v=[100-d.cost/12,100-d.co2*1.5,d.ot,100-d.dm*20,d.sla],n=['Biaya','Emisi','Waktu','Rusak','SLA'],P=(r,i)=>[100+r*Math.sin(i*1.2566),100-r*Math.cos(i*1.2566)];
+ return `<svg viewBox="0 0 200 200" width="100%" height="220">${[.5,1].map(s=>`<polygon fill="none" stroke="var(--ln)" points="${n.map((_,i)=>P(80*s,i)).join(' ')}"/>`).join('')}<polygon fill="#1DB36B55" stroke="#1DB36B" stroke-width="2" points="${v.map((x,i)=>P(Math.max(8,x)*.8,i)).join(' ')}"/>${n.map((t,i)=>{const p=P(95,i);return `<text x="${p[0]}" y="${p[1]}" font-size="9" fill="currentColor" text-anchor="middle">${t}</text>`}).join('')}</svg>`}
+function drawer(i){const d=D[i],m=[...Array(6)].map((_,k)=>d.cost*(1.06-.012*k*(d.f=='EV'?.5:1))),M=Math.max(...m),mn=Math.min(...m);
+ $('#dr').innerHTML=`<button class="chip" id="x">Tutup</button><h2>${d.n}</h2><span class="tag">${d.f}</span> <span class="tag o">${d.id%3==0?'Telematika':d.id%3==1?'Manual':'Estimasi'}</span>${radar(d)}<div class="lbl">Tren 6 Bulan</div><svg viewBox="0 0 120 40" width="100%" height="80"><polyline fill="none" stroke="#1DB36B" stroke-width="2" points="${m.map((v,k)=>k*22+','+(36-(v-mn)/(M-mn||1)*32)).join(' ')}"/></svg><div class="big">${rp(d.cost)}</div>`;
+ $('#dr').classList.add('open');$('#x').onclick=()=>$('#dr').classList.remove('open')}
+function rank(){const R=topsis(),old={};document.querySelectorAll('#rl .rk').forEach(e=>old[e.dataset.id]=e.getBoundingClientRect().top);
+ $('#rl').innerHTML=R.map((d,i)=>`<div class="rk card" data-id="${d.id}" style="cursor:pointer;${d.id==sel?'outline:2px solid var(--g)':''}"><b>#${i+1}</b><div>${d.n}<div class="bar"><i style="width:${d.sc}%;background:var(--g)"></i></div></div><b>${nf(d.sc)}</b></div>`).join('');
+ document.querySelectorAll('#rl .rk').forEach(e=>{const o=old[e.dataset.id];if(o!=null){const dy=o-e.getBoundingClientRect().top;if(dy){e.style.transform=`translateY(${dy}px)`;e.style.transition='none';requestAnimationFrame(()=>requestAnimationFrame(()=>{e.style.transition='';e.style.transform=''}))}}e.onclick=()=>{sel=+e.dataset.id;rank()}});
+ const d=D[sel],ks=Object.keys(W),cl=['#14532D','#1DB36B','#F59E0B','#EF4444','#8B5CF6'];
+ $('#br').innerHTML=`<b>${d.n}</b><div class="bar" style="height:24px;margin:10px 0">${d.part.map((p,j)=>`<i style="width:${p}%;background:${cl[j]}"></i>`).join('')}</div><div class="chips">${ks.map((k,j)=>`<span class="tag" style="background:${cl[j]}22;color:${cl[j]}">${k} ${nf(d.part[j],0)}%</span>`).join('')}</div>`}
+function sliders(){$('#sl').innerHTML=Object.keys(W).map(k=>`<div class="row" style="grid-template-columns:110px 1fr 40px"><label for="s${k}">${k}</label><input type="range" id="s${k}" data-k="${k}" min="0" max="100" value="${W[k]}"><b>${W[k]}%</b></div>`).join('');
+ $('#sl').querySelectorAll('input').forEach(s=>s.oninput=()=>{const k=s.dataset.k,v=+s.value,o=Object.keys(W).filter(x=>x!=k),rest=o.reduce((a,x)=>a+W[x],0);W[k]=v;o.forEach(x=>W[x]=rest?Math.round(W[x]/rest*(100-v)):Math.round((100-v)/4));
+  $('#sl').querySelectorAll('input').forEach(i=>{i.value=W[i.dataset.k];i.nextElementSibling.textContent=W[i.dataset.k]+'%'});rank()});
+ $('#sl').querySelectorAll('input').forEach(s=>s.onchange=()=>{const r=$('#lg').insertRow();r.innerHTML=`<td>Raka P.</td><td>${Object.values(W).join('/')}</td><td>${new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}</td>`})}
+function pre(){$('#pre').innerHTML=Object.keys(PRE).map(p=>`<button class="chip">${p}</button>`).join('');$('#pre').querySelectorAll('button').forEach(b=>b.onclick=()=>{Object.keys(W).forEach((k,i)=>W[k]=PRE[b.textContent][i]);sliders();rank()})}
+const S={bbm:10,vol:30,mt:3,fl:'EV',mode:'Truk'};
+function sim(){const p=D[S.mt],avg=D.reduce((a,d)=>a+d.cost,0)/D.length,avgC=D.reduce((a,d)=>a+d.co2,0)/D.length,fm={Diesel:[1,1],B40:[1.04,.8],HVO:[1.12,.35],EV:[1.2,.1]}[S.fl],mf=S.mode=='Kereta'?[.85,.3]:[1,1],v=S.vol/100,fuel=1+S.bbm/100*.35;
+ const base=avg*fuel,newc=p.b.Tarif*fm[0]*mf[0]*(1+S.bbm/100*(S.fl=='EV'?.05:.35))+p.b.Keterlambatan+p.b.Kerusakan+p.b.Risiko+p.co2*.9*mf[1]*fm[1]*1.2,dc=(newc-base)*v,pc=dc/(base)*100,ce=p.co2*fm[1]*mf[1],de=(ce-avgC)*v,pe=de/avgC*100,dot=(p.ot-D.reduce((a,d)=>a+d.ot,0)/D.length)*v,pay=dc<0?0:Math.max(3,Math.round(24*(1+pc/20)));
+ const sel=(id,arr,key)=>`<select id="${id}" aria-label="${id}">${arr.map((x,i)=>`<option value="${key?i:x}" ${(key?S.mt==i:S[id.slice(1)]==x)?'selected':''}>${key?x.n:x}</option>`).join('')}</select>`;
+ if(!$('#si').children.length)$('#si').innerHTML=`<div class="lbl">Kenaikan BBM: <b id="vb">${S.bbm}%</b></div><input type="range" id="bbm" min="0" max="40" value="${S.bbm}"><div class="lbl" style="margin-top:14px">Volume dialihkan: <b id="vv">${S.vol}%</b></div><input type="range" id="vol" min="0" max="100" value="${S.vol}"><div class="lbl" style="margin-top:14px">Mitra tujuan</div>${sel('mt',D,1)}<div class="lbl" style="margin-top:14px">Armada</div>${sel('fl',FL)}<div class="lbl" style="margin-top:14px">Moda</div>${sel('mode',['Truk','Kereta'])}`;
+ const O=[['Δ Biaya',(dc<0?'−':'+')+rp(Math.abs(dc))+' ('+nf(pc)+'%)',dc<0],['Δ Emisi',nf(de)+' kg ('+nf(pe)+'%)',de<0],['Δ On-Time',(dot>=0?'+':'')+nf(dot)+' pp',dot>=0],['Payback',pay+' bulan',true]];
+ $('#so').innerHTML=O.map(o=>`<div class="card"><div class="lbl">${o[0]}</div><div class="big ${o[2]?'up':'dn'}" style="font-size:19px">${o[1]}</div></div>`).join('');
+ const mx=Math.max(base,base+dc*0+newc*v+base*(1-v))||1,aft=base*(1-v)+newc*v;
+ $('#sb').innerHTML=`<div class="lbl">Biaya (Rp ribu/shipment)</div>`+[['Sebelum',base,'var(--mu)'],['Sesudah',aft,'var(--g)']].map(r=>`<div class="row"><span>${r[0]}</span><div class="bar"><i style="width:${r[1]/Math.max(base,aft)*100}%;background:${r[2]}"></i></div><b>${Math.round(r[1])}</b></div>`).join('')+`<div class="lbl" style="margin-top:12px">Emisi (kg CO₂e/leg)</div>`+[['Sebelum',avgC,'var(--mu)'],['Sesudah',avgC*(1-v)+ce*v,'var(--g)']].map(r=>`<div class="row"><span>${r[0]}</span><div class="bar"><i style="width:${r[1]/Math.max(avgC,ce*v+avgC*(1-v))*100}%;background:${r[2]}"></i></div><b>${nf(r[1])}</b></div>`).join('')}
+function bindSim(){const g=id=>$('#'+id);['bbm','vol'].forEach(k=>g(k).oninput=()=>{S[k]=+g(k).value;g(k=='bbm'?'vb':'vv').textContent=S[k]+'%';sim()});g('mt').onchange=e=>{S.mt=+e.target.value;sim()};g('fl').onchange=e=>{S.fl=e.target.value;sim()};g('mode').onchange=e=>{S.mode=e.target.value;sim()}}
+function risk(){const S4=['Normal','Musim Hujan','Libur Panjang','Lebaran'],f=[1,1.5,1.3,1.8];
+ $('#hm').innerHTML='<div></div>'+S4.map(s=>`<div class="lbl">${s}</div>`).join('')+COR.map((c,ci)=>`<div class="lbl" style="text-align:left">${c}</div>`+f.map((m,si)=>{const v=Math.min(95,Math.round((12+ci*4+(ci==4?10:0))*m));const col=v>45?'#EF4444':v>28?'#F59E0B':'#1DB36B';return `<div style="background:${col}33;color:${col}">${v}%</div>`}).join('')).join('');
+ $('#rc').innerHTML=D.slice().sort((a,b)=>a.ot-b.ot).slice(0,6).map(d=>{const pl=Math.round((100-d.ot)*2.2),pd=Math.round(d.dm*9),dr=[['Cuaca',34],['Kepadatan',26],['Usia Armada',22],['Histori',18]];return `<div class="card"><b>${d.n}</b><div class="lbl">${d.c}</div><div class="chips" style="margin:8px 0"><span class="tag r">Terlambat ${pl}%</span><span class="tag o">Rusak ${pd}%</span><span class="tag">Confidence ${78+d.id%12}%</span></div><div class="chips">${dr.map(x=>`<span class="tag" style="background:var(--ln);color:var(--tx)">${x[0]} ${x[1]}%</span>`).join('')}</div><div class="chips" style="margin-top:10px"><span class="tag">Alihkan 20% • ${D[(d.id+3)%12].n}</span></div></div>`}).join('')}
+document.querySelectorAll('nav [data-v]').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==b.dataset.v));$('#dr').classList.remove('open');({dash,score,rank,sim,risk})[b.dataset.v]()});
+$('#qb').onclick=$('#q').oninput=()=>{document.querySelector('[data-v=score]').click()};
+pre();sliders();rank();sim();bindSim();risk();score();
+setTimeout(()=>{$('#sk').hidden=true;$('#dc').hidden=false;dash()},600);
+</script></body></html>
